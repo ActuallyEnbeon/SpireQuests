@@ -96,8 +96,16 @@ public abstract class AbstractQuest implements Comparable<AbstractQuest> {
     }
 
     //override if you want to set up the text differently
+    private String rewardsText = null;
     public String getRewardsText() {
-        return localization.EXTRA_TEXT[1];
+        if (rewardsText == null) {
+            StringBuilder sb = new StringBuilder();
+            for (QuestReward reward : questRewards) {
+                sb.append(reward.rewardText).append('\n');
+            }
+            rewardsText = sb.toString();
+        }
+        return rewardsText;
     }
 
     /**
