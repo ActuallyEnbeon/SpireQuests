@@ -44,5 +44,11 @@
       "[Card] ",
       "Tip: Right-click for detailed card view!"
     ]
+  },
+  "${ModID}:RunHistoryScreen": {
+    "TEXT": [
+      "Quests:",
+      "Completed:"
+    ]
   }
 }

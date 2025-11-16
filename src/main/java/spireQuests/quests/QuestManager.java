@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import spireQuests.Anniv8Mod;
+import spireQuests.patches.QuestRunHistoryPatch;
 
 import java.util.*;
 
@@ -114,6 +115,7 @@ public class QuestManager {
         questList.add(quest);
         questList.sort(null);
         quest.onStart();
+        QuestRunHistoryPatch.questPickupPerFloorLog.get(AbstractDungeon.player).get(AbstractDungeon.floorNum).add(quest.id);
     }
 
     public static void completeQuest(AbstractQuest quest) {
@@ -134,6 +136,7 @@ public class QuestManager {
 
         quests().remove(quest);
         quest.obtainRewards();
+        QuestRunHistoryPatch.questCompletionPerFloorLog.get(AbstractDungeon.player).get(AbstractDungeon.floorNum).add(quest.id);
     }
 
     public static void failQuest(AbstractQuest quest) {
