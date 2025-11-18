@@ -14,5 +14,9 @@
   "${ModID}:Cardmancy": {
     "NAME": "Cardmancy",
     "DESCRIPTION": "Gain !B! Block. NL The next card you play this turn is returned to the top of your draw pile and upgraded."
+  },
+  "${ModID}:Balance": {
+    "NAME": "Balance",
+    "DESCRIPTION": "Gain !B! Block. NL Enter Calm."
   }
 }
