@@ -83,6 +83,11 @@ public class BackToBasicsQuest  extends AbstractQuest {
     @Override
     public void onComplete() {
         ArrayList<AbstractCard> upgradableCards = new ArrayList<>();
+        for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
+            if (c.canUpgrade() && (c.rarity == CardRarity.BASIC || c.rarity == CardRarity.COMMON)) {
+                upgradableCards.add(c);
+            }
+        }
         Collections.shuffle(upgradableCards, new Random(AbstractDungeon.miscRng.randomLong()));
 
         if (upgradableCards.size() == 1) {
