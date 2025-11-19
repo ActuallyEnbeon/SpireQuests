@@ -170,6 +170,9 @@ public class QuestUI {
                     else if (tracker.isComplete()) {
                         textColor = Settings.GOLD_COLOR;
                     }
+                    else if (tracker.isDisabled()) {
+                        textColor = Color.GRAY;
+                    }
                     FontHelper.renderFontRightAligned(sb, smallFont, tracker.toString(), xPos, yPos - SMALL_SPACING * 0.5f, textColor);
                     quest.width = Math.max(quest.width, FontHelper.layout.width);
                 }

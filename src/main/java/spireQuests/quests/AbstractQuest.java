@@ -387,6 +387,9 @@ public abstract class AbstractQuest implements Comparable<AbstractQuest> {
         public boolean isFailed() {
             return isFailed.get();
         }
+        public boolean isDisabled() {
+            return false;
+        }
 
         public boolean hidden() {
             return hidden;

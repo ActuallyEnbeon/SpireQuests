@@ -1,0 +1,13 @@
+{
+  "${ModID}:BackToBasicsQuest": {
+    "TEXT": [
+      "Keep it Simple",
+      "Defeat an Elite or Boss without playing uncommon or rare cards.",
+      "coda"
+    ],
+    "EXTRA_TEXT": [
+      "Defeat an Elite or Boss without playing uncommon or rare cards.",
+      "Upgrade three random starter or common cards."
+    ]
+  }
+}
