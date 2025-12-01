@@ -37,6 +37,7 @@ import spireQuests.quests.QuestManager;
 import spireQuests.quests.coda.potions.NuclearJuicePotion;
 import spireQuests.quests.gk.monsters.ICEliteMonster;
 import spireQuests.quests.modargo.monsters.DefectEliteMonster;
+import spireQuests.quests.ramchops.EvilSentryQuest;
 import spireQuests.quests.ramchops.monsters.EvilSentry;
 import spireQuests.rewards.SingleCardReward;
 import spireQuests.ui.FixedModLabeledToggleButton.FixedModLabeledToggleButton;
@@ -188,7 +189,7 @@ public class Anniv8Mod implements
     public static void addMonsters() {
         BaseMod.addMonster(ICEliteMonster.ID, () -> new ICEliteMonster());
         BaseMod.addMonster(DefectEliteMonster.ID, () -> new DefectEliteMonster());
-        BaseMod.addMonster(EvilSentry.ID, EvilSentry.ENC_NAME, () -> new MonsterGroup(new AbstractMonster[]{
+        BaseMod.addMonster(EvilSentry.ID, QuestStringsUtils.getQuestString(makeID(EvilSentryQuest.class.getSimpleName())).TITLE, () -> new MonsterGroup(new AbstractMonster[]{
                 new EvilSentry(-330.0F, 25.0F),
                 new EvilSentry(-85.0F, 10.0F),
                 new EvilSentry(140.0F, 30.0F)
