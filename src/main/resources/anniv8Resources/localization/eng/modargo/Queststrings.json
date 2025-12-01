@@ -51,7 +51,7 @@
     "TITLE": "Multiclass",
     "DESCRIPTION": "Cards from another character will show up in your card rewards. Add #b3 of their cards to your deck to embrace your new techniques.",
     "AUTHOR": "modargo",
-    "REWARD": "Multiclass: %s",
+    "REWARD": "Multiclass Emblem",
     "TRACKER_TEXT": [
       "Cards added"
     ],
