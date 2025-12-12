@@ -1,0 +1,8 @@
+{
+  "${ModID}:MarshmallowOption": {
+    "TEXT": [
+      "Roast Marshmallows",
+      "Gain 3 Max HP. Tasty!"
+    ]
+  }
+}

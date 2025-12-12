@@ -37,5 +37,13 @@
     "EXTRA_TEXT": [
       " NL NL #rWARNING: #rQuest #rwill #rfail #ron #rpickup #rif #rtaken #rafter #rspending #rmoney #rat #rthis #rshop!"
     ]
+  },
+  "${ModID}:ThatsSmoresQuest": {
+    "TITLE": "That's S'Mores",
+    "DESCRIPTION": "You can now roast marshmallows at Rest Sites. Do this #b2 times.",
+    "AUTHOR": "RamChops Games",
+    "TRACKER_TEXT": [
+      "Roast Marshmallows"
+    ]
   }
 }
