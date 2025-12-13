@@ -3,18 +3,17 @@ package spireQuests.quests.iry;
 import basemod.helpers.CardPowerTip;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.purple.Blasphemy;
-import com.megacrit.cardcrawl.cards.red.Offering;
+import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.PowerTip;
+import com.megacrit.cardcrawl.random.Random;
 import spireQuests.patches.QuestTriggers;
 import spireQuests.quests.AbstractQuest;
 import spireQuests.quests.QuestReward;
 import spireQuests.quests.iry.cards.ClumsyBlasphemy;
-import spireQuests.quests.iry.cards.ClumsyOffering;
+import spireQuests.quests.iry.util.LessonQuestUtil;
 import spireQuests.util.Wiz;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 // LessonOfTheAsceticQuest:
 // Obtain a modified blasphemy with ethereal and no upsides
@@ -47,6 +46,8 @@ public class LessonOfTheAsceticQuest extends AbstractQuest {
 
     @Override
     public boolean canSpawn() {
-        return !Wiz.p().chosenClass.name().equals("WATCHER");
+        Random rng = new Random(Settings.seed + (1914L * (AbstractDungeon.floorNum + 1)));
+        boolean weightedSpawnCheck = rng.randomBoolean(LessonQuestUtil.getLessonSpawnChance());
+        return weightedSpawnCheck && !Wiz.p().chosenClass.name().equals("WATCHER");
     }
 }
