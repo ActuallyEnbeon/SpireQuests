@@ -195,17 +195,15 @@ public class WatcherEliteMonster extends AbstractSQMonster {
     public void prepareThroughViolence() {
         // When she enters Divinity,
         //  - If Through Violence is available, use it
-        //  - Otherwise, use Reach Heaven IF she was planning to use Wave of the Hand / Protect
-        //    (Ensures that she will use her Divinity turn to attack)
+        //  - Otherwise, use Reach Heaven
         if (hasThroughViolence) {
             setMoveShortcut(THROUGH_VIOLENCE, MOVES[THROUGH_VIOLENCE]);
-            createIntent();
             addToBot(new SetMoveAction(this, MOVES[THROUGH_VIOLENCE], THROUGH_VIOLENCE, Intent.ATTACK));
-        } else if (nextMove == WAVE_PROTECT) {
+        } else {
             setMoveShortcut(REACH_HEAVEN, MOVES[REACH_HEAVEN]);
-            createIntent();
             addToBot(new SetMoveAction(this, MOVES[REACH_HEAVEN], REACH_HEAVEN, Intent.ATTACK));
         }
+        createIntent();
     }
 
     @Override
