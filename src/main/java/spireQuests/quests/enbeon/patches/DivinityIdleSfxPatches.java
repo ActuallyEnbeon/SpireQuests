@@ -13,6 +13,8 @@ import com.megacrit.cardcrawl.screens.DeathScreen;
 import com.megacrit.cardcrawl.screens.options.ConfirmPopup;
 import spireQuests.quests.enbeon.monsters.WatcherEliteMonster;
 
+// These patches target everywhere in basegame where stance idle SFX are stopped
+// In this way, the Watcher elite's SFX should hopefully act the same as regular stance SFX
 @SuppressWarnings("unused")
 public class DivinityIdleSfxPatches {
     public static void checkCurrentMonsters() {
