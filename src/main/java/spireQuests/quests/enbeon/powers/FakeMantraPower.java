@@ -28,8 +28,8 @@ public class FakeMantraPower extends AbstractSQPower {
 
     private void divinityCheck() {
         if (amount >= 10) {
-            addToBot(new ApplyPowerAction(owner, owner, new InvisibleDivinityForMonsterPower(owner)));
-            addToBot(new ReducePowerAction(owner, owner, this, 10));
+            addToTop(new ReducePowerAction(owner, owner, this, 10));
+            addToTop(new ApplyPowerAction(owner, owner, new InvisibleDivinityForMonsterPower(owner)));
         }
     }
 
