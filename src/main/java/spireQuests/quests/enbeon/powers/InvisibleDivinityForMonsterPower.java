@@ -36,7 +36,7 @@ public class InvisibleDivinityForMonsterPower extends AbstractSQPower implements
 
     @Override
     public void atEndOfRound() {
-        addToBot(new RemoveSpecificPowerAction(owner, owner, this));
+        addToTop(new RemoveSpecificPowerAction(owner, owner, this));
     }
 
     @Override
