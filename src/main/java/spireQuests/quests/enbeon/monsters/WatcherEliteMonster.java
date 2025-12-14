@@ -144,16 +144,6 @@ public class WatcherEliteMonster extends AbstractSQMonster {
                 addToBot(new ApplyPowerAction(this, this, new FakeWaveOfTheHandPower(this, 2)));
                 doFakePlay(new Protect(), 8);
                 addToBot(new GainBlockAction(this, calcAscensionTankiness(12)));
-                // Use the actual power value, just in case it's modified by something
-                addToBot(new AbstractGameAction() {
-                    @Override
-                    public void update() {
-                        AbstractPower wave = getPower(FakeWaveOfTheHandPower.POWER_ID);
-                        addToTop(new ApplyPowerAction(Wiz.adp(), WatcherEliteMonster.this,
-                                new WeakPower(Wiz.adp(), (wave != null ? wave.amount : 0), true)));
-                        this.isDone = true;
-                    }
-                });
                 break;
             case 4: // Through Violence
                 doFakePlay(new ThroughViolence(), 3);

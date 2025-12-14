@@ -11,7 +11,7 @@ import spireQuests.abstracts.AbstractSQPower;
 
 import static spireQuests.Anniv8Mod.makeID;
 
-public class FakeWaveOfTheHandPower extends AbstractSQPower {
+public class FakeWaveOfTheHandPower extends AbstractSQPower implements OnGainBlockMonsterPower {
     public static String POWER_ID = makeID(FakeWaveOfTheHandPower.class.getSimpleName());
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
     public static final String NAME = powerStrings.NAME;
@@ -23,8 +23,13 @@ public class FakeWaveOfTheHandPower extends AbstractSQPower {
         this.loadRegion("wave_of_the_hand");
     }
 
+    @Override
+    public void onGainBlock(int blockAmount) {
+        addToTop(new ApplyPowerAction(AbstractDungeon.player, owner, new WeakPower(AbstractDungeon.player, amount, true)));
+    }
+
     public void atEndOfRound() {
-        this.addToBot(new RemoveSpecificPowerAction(owner, owner, this));
+        addToBot(new RemoveSpecificPowerAction(owner, owner, this));
     }
 
     @Override
