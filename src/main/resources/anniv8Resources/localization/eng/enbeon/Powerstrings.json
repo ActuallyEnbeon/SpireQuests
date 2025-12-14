@@ -1,0 +1,29 @@
+{
+  "${ModID}:FakeDevotionPower": {
+    "NAME": "Devotion",
+    "DESCRIPTIONS": [
+      "At the end of its turn, gains #b",
+      " #yMantra."
+    ]
+  },
+  "${ModID}:FakeMantraPower": {
+    "NAME": "Mantra",
+    "DESCRIPTIONS": [
+      "When this creature obtains #b10 #yMantra, it enters #yDivinity."
+    ]
+  },
+  "${ModID}:FakeWaveOfTheHandPower": {
+    "NAME": "Wave of the Hand",
+    "DESCRIPTIONS": [
+      "Whenever this creature gains #yBlock, it applies #b",
+      " #yWeak to you."
+    ]
+  },
+  "${ModID}:InvisibleDivinityForMonsterPower": {
+    "NAME": "Divinity",
+    "DESCRIPTIONS": [
+      "This creature deals triple damage with attacks. It exits #yDivinity at the end of its turn.",
+      " - TRANSLATOR NOTE: - These strings should never appear in-game. It's fine to leave them untranslated."
+    ]
+  }
+}

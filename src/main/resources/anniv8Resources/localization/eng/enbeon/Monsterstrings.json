@@ -1,0 +1,12 @@
+{
+  "${ModID}:WatcherEliteMonster": {
+    "MOVES": [
+      "Devotion",
+      "Reach Heaven",
+      "Wallop",
+      "Wave of the Hand / Protect",
+      "Through Violence"
+    ],
+    "NAME": "Purple Blur"
+  }
+}
