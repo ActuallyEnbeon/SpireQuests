@@ -41,6 +41,7 @@ public class WatcherEliteMonster extends AbstractSQMonster {
     private static final Byte DEVOTION = 0, REACH_HEAVEN = 1, WALLOP = 2, WAVE_PROTECT = 3, THROUGH_VIOLENCE = 4;
 
     private int devotionAmt = 2;
+    private int waveAmt = 1;
     private boolean hasThroughViolence = false;
     private float particleTimer = 0.0f;
     private float auraTimer = 0.0f;
@@ -68,6 +69,7 @@ public class WatcherEliteMonster extends AbstractSQMonster {
         addMove(THROUGH_VIOLENCE, Intent.ATTACK, calcAscensionDamage(20));
 
         devotionAmt = calcAscensionSpecial(devotionAmt);
+        waveAmt = calcAscensionSpecial(waveAmt);
 
         loadAnimation("images/characters/watcher/idle/skeleton.atlas",
                 "images/characters/watcher/idle/skeleton.json",
@@ -140,8 +142,8 @@ public class WatcherEliteMonster extends AbstractSQMonster {
                 });
                 break;
             case 3: // Wave of the Hand / Protect
-                doFakePlay(new WaveOfTheHand(), Integer.MIN_VALUE); // Should always be upgraded
-                addToBot(new ApplyPowerAction(this, this, new FakeWaveOfTheHandPower(this, 2)));
+                doFakePlay(new WaveOfTheHand(), 18);
+                addToBot(new ApplyPowerAction(this, this, new FakeWaveOfTheHandPower(this, waveAmt)));
                 doFakePlay(new Protect(), 8);
                 addToBot(new GainBlockAction(this, calcAscensionTankiness(12)));
                 break;
