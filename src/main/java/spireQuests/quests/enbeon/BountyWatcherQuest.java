@@ -11,7 +11,7 @@ import spireQuests.quests.AbstractQuest;
 import spireQuests.quests.QuestManager;
 import spireQuests.quests.QuestReward;
 import spireQuests.quests.enbeon.monsters.WatcherEliteMonster;
-import spireQuests.quests.modargo.relics.VolatileStardust;
+import spireQuests.quests.enbeon.relics.DivineOculus;
 
 import static spireQuests.Anniv8Mod.makeID;
 
@@ -27,7 +27,7 @@ public class BountyWatcherQuest extends AbstractQuest {
                 .setFailureTrigger(QuestTriggers.ACT_CHANGE)
                 .add(this);
 
-        addReward(new QuestReward.RelicReward(new VolatileStardust()));
+        addReward(new QuestReward.RelicReward(new DivineOculus()));
         titleScale = 0.9f;
     }
 
