@@ -11,7 +11,6 @@ import spireQuests.quests.AbstractQuest;
 import spireQuests.quests.QuestManager;
 import spireQuests.quests.QuestReward;
 import spireQuests.quests.enbeon.monsters.WatcherEliteMonster;
-import spireQuests.quests.modargo.monsters.DefectEliteMonster;
 import spireQuests.quests.modargo.relics.VolatileStardust;
 
 import static spireQuests.Anniv8Mod.makeID;

@@ -6,7 +6,6 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import spireQuests.abstracts.AbstractSQPower;
-import spireQuests.quests.enbeon.monsters.WatcherEliteMonster;
 
 import static spireQuests.Anniv8Mod.makeID;
 

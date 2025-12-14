@@ -13,7 +13,6 @@ import com.megacrit.cardcrawl.stances.DivinityStance;
 import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
 import com.megacrit.cardcrawl.vfx.stance.StanceChangeParticleGenerator;
 import spireQuests.abstracts.AbstractSQPower;
-import spireQuests.actions.RemoveSpecificPowerActionNoIconOrText;
 import spireQuests.quests.enbeon.monsters.WatcherEliteMonster;
 
 import static spireQuests.Anniv8Mod.makeID;
