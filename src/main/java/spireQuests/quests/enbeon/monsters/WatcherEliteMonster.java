@@ -61,7 +61,7 @@ public class WatcherEliteMonster extends AbstractSQMonster {
         super(NAME, ID, 80, -4f, -16f, 220f, 290f, null, x, y);
         type = EnemyType.ELITE;
 
-        setHp(calcAscensionTankiness(80), calcAscensionTankiness(87));
+        setHp(calcAscensionTankiness(72), calcAscensionTankiness(80));
         addMove(DEVOTION, Intent.BUFF);
         addMove(REACH_HEAVEN, Intent.ATTACK, calcAscensionDamage(10));
         addMove(WALLOP, Intent.ATTACK_DEFEND, calcAscensionDamage(9));

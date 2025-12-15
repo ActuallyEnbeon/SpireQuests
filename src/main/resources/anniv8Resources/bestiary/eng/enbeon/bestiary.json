@@ -1,0 +1,254 @@
+{
+	"monsters": [
+		{
+			"name": "Watcher",
+			"id": "${ModID}:WatcherEliteMonster",
+			"ai": [
+				{
+					"min_asc": 0,
+					"desc": "Starts with #wDevotion -> #wReach #wHeaven. Afterwards, cycles #wWallop -> #wWave #wof #wthe #wHand / #wProtect until entering Divinity. Upon entering Divinity, if #wReach #wHeaven was used since last entering Divinity, uses #wThrough #wViolence. Otherwise, uses #wReach #wHeven. Then cycles #wWallop -> #wWave #wof #wthe #wHand / #wProtect again.",
+					"notes": "#wDevotion gives Mantra every turn. Once 10 Mantra are obtained, enters Divinity for the turn, dealing triple damage with attacks. #wWallop gives Block equal to the amount of unblocked damage dealt. #wWave #wof #wthe #wHand applies Weak to you whenever Watcher gains Block that turn.",
+					"hp": "(72 - 80 HP)",
+					"moves": [
+						{
+							"name": "Devotion",
+							"effects": [
+								{
+									"name": "Devotion 2",
+									"color": "BUFF"
+								}
+							]
+						},
+						{
+							"name": "Reach Heaven",
+							"effects": [
+								{
+									"name": "10",
+									"color": "DAMAGE"
+								}
+							]
+						},
+						{
+							"name": "Wallop",
+							"effects": [
+								{
+									"name": "9",
+									"color": "DAMAGE"
+								},
+								{
+									"name": "?",
+									"color": "BLOCK"
+								}
+							]
+						},
+						{
+							"name": "Wave of the Hand / Protect",
+							"effects": [
+								{
+									"name": "Wave of the Hand 1",
+									"color": "BUFF"
+								},
+								{
+									"name": "12",
+									"color": "BLOCK"
+								}
+							]
+						},
+						{
+							"name": "Through Violence",
+							"effects": [
+								{
+									"name": "20",
+									"color": "DAMAGE"
+								}
+							]
+						}
+					]
+				},
+				{
+                  "min_asc": 3,
+                  "desc": "Starts with #wDevotion -> #wReach #wHeaven. Afterwards, cycles #wWallop -> #wWave #wof #wthe #wHand / #wProtect until entering Divinity. Upon entering Divinity, if #wReach #wHeaven was used since last entering Divinity, uses #wThrough #wViolence. Otherwise, uses #wReach #wHeven. Then cycles #wWallop -> #wWave #wof #wthe #wHand / #wProtect again.",
+                  "notes": "#wDevotion gives Mantra every turn. Once 10 Mantra are obtained, enters Divinity for the turn, dealing triple damage with attacks. #wWallop gives Block equal to the amount of unblocked damage dealt. #wWave #wof #wthe #wHand applies Weak to you whenever Watcher gains Block that turn.",
+                  "hp": "(72 - 80 HP)",
+					"moves": [
+						{
+							"name": "Devotion",
+							"effects": [
+								{
+									"name": "Devotion 2",
+									"color": "BUFF"
+								}
+							]
+						},
+						{
+							"name": "Reach Heaven",
+							"effects": [
+								{
+									"name": "11",
+									"color": "DAMAGE"
+								}
+							]
+						},
+						{
+							"name": "Wallop",
+							"effects": [
+								{
+									"name": "10",
+									"color": "DAMAGE"
+								},
+								{
+									"name": "?",
+									"color": "BLOCK"
+								}
+							]
+						},
+						{
+							"name": "Wave of the Hand / Protect",
+							"effects": [
+								{
+									"name": "Wave of the Hand 1",
+									"color": "BUFF"
+								},
+								{
+									"name": "12",
+									"color": "BLOCK"
+								}
+							]
+						},
+						{
+							"name": "Through Violence",
+							"effects": [
+								{
+									"name": "22",
+									"color": "DAMAGE"
+								}
+							]
+						}
+					]
+				},
+				{
+					"min_asc": 8,
+                    "desc": "Starts with #wDevotion -> #wReach #wHeaven. Afterwards, cycles #wWallop -> #wWave #wof #wthe #wHand / #wProtect until entering Divinity. Upon entering Divinity, if #wReach #wHeaven was used since last entering Divinity, uses #wThrough #wViolence. Otherwise, uses #wReach #wHeven. Then cycles #wWallop -> #wWave #wof #wthe #wHand / #wProtect again.",
+                    "notes": "#wDevotion gives Mantra every turn. Once 10 Mantra are obtained, enters Divinity for the turn, dealing triple damage with attacks. #wWallop gives Block equal to the amount of unblocked damage dealt. #wWave #wof #wthe #wHand applies Weak to you whenever Watcher gains Block that turn.",
+                    "hp": "(79 - 88 HP)",
+					"moves": [
+						{
+							"name": "Devotion",
+							"effects": [
+								{
+									"name": "Devotion 2",
+									"color": "BUFF"
+								}
+							]
+						},
+						{
+							"name": "Reach Heaven",
+							"effects": [
+								{
+									"name": "11",
+									"color": "DAMAGE"
+								}
+							]
+						},
+						{
+							"name": "Wallop",
+							"effects": [
+								{
+									"name": "10",
+									"color": "DAMAGE"
+								},
+								{
+									"name": "?",
+									"color": "BLOCK"
+								}
+							]
+						},
+						{
+							"name": "Wave of the Hand / Protect",
+							"effects": [
+								{
+									"name": "Wave of the Hand 1",
+									"color": "BUFF"
+								},
+								{
+									"name": "13",
+									"color": "BLOCK"
+								}
+							]
+						},
+						{
+							"name": "Through Violence",
+							"effects": [
+								{
+									"name": "22",
+									"color": "DAMAGE"
+								}
+							]
+						}
+					]
+				},
+				{
+					"min_asc": 18,
+                    "desc": "Starts with #wDevotion -> #wReach #wHeaven. Afterwards, cycles #wWallop -> #wWave #wof #wthe #wHand / #wProtect until entering Divinity. Upon entering Divinity, if #wReach #wHeaven was used since last entering Divinity, uses #wThrough #wViolence. Otherwise, uses #wReach #wHeven. Then cycles #wWallop -> #wWave #wof #wthe #wHand / #wProtect again.",
+                    "notes": "#wDevotion gives Mantra every turn. Once 10 Mantra are obtained, enters Divinity for the turn, dealing triple damage with attacks. #wWallop gives Block equal to the amount of unblocked damage dealt. #wWave #wof #wthe #wHand applies Weak to you whenever Watcher gains Block that turn.",
+                    "hp": "(79 - 88 HP)",
+					"moves": [
+						{
+							"name": "Devotion",
+							"effects": [
+								{
+									"name": "Devotion 3",
+									"color": "BUFF"
+								}
+							]
+						},
+						{
+							"name": "Reach Heaven",
+							"effects": [
+								{
+									"name": "11",
+									"color": "DAMAGE"
+								}
+							]
+						},
+						{
+							"name": "Wallop",
+							"effects": [
+								{
+									"name": "10",
+									"color": "DAMAGE"
+								},
+								{
+									"name": "?",
+									"color": "BLOCK"
+								}
+							]
+						},
+						{
+							"name": "Wave of the Hand / Protect",
+							"effects": [
+								{
+									"name": "Wave of the Hand 2",
+									"color": "BUFF"
+								},
+								{
+									"name": "13",
+									"color": "BLOCK"
+								}
+							]
+						},
+						{
+							"name": "Through Violence",
+							"effects": [
+								{
+									"name": "22",
+									"color": "DAMAGE"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}
