@@ -6,9 +6,9 @@
 			"ai": [
 				{
 					"min_asc": 0,
-					"desc": "Starts with #wDevotion -> #wReach #wHeaven. Afterwards, cycles #wWallop -> #wWave #wof #wthe #wHand / #wProtect until entering Divinity. Upon entering Divinity, if #wReach #wHeaven was used since last entering Divinity, uses #wThrough #wViolence. Otherwise, uses #wReach #wHeven. Then cycles #wWallop -> #wWave #wof #wthe #wHand / #wProtect again.",
-					"notes": "#wDevotion gives Mantra every turn. Once 10 Mantra are obtained, enters Divinity for the turn, dealing triple damage with attacks. #wWallop gives Block equal to the amount of unblocked damage dealt. #wWave #wof #wthe #wHand applies Weak to you whenever Watcher gains Block that turn.",
-					"hp": "(72 - 80 HP)",
+                    "desc": "Starts with #wDevotion -> #wReach #wHeaven. Afterwards, cycles #wWallop -> #wWave #wof #wthe #wHand / #wProtect until entering #sDivinity. NL Upon entering #sDivinity, if #wReach #wHeaven was used since last entering #sDivinity, uses #wThrough #wViolence. Otherwise, uses #wReach #wHeven. Then cycles #wWallop -> #wWave #wof #wthe #wHand / #wProtect again.",
+                    "notes": "#uDevotion gives #uMantra every turn. Once 10 #uMantra are obtained, enters #sDivinity for the turn, dealing #rtriple #rdamage with attacks. NL #wWallop #bBlocks equal to the amount of #runblocked #rdamage dealt. NL #uWave #uof #uthe #uHand applies #dWeak to you whenever Watcher gains #bBlock that turn.",
+                    "hp": "(72 - 80 HP)",
 					"moves": [
 						{
 							"name": "Devotion",
@@ -66,10 +66,10 @@
 					]
 				},
 				{
-                  "min_asc": 3,
-                  "desc": "Starts with #wDevotion -> #wReach #wHeaven. Afterwards, cycles #wWallop -> #wWave #wof #wthe #wHand / #wProtect until entering Divinity. Upon entering Divinity, if #wReach #wHeaven was used since last entering Divinity, uses #wThrough #wViolence. Otherwise, uses #wReach #wHeven. Then cycles #wWallop -> #wWave #wof #wthe #wHand / #wProtect again.",
-                  "notes": "#wDevotion gives Mantra every turn. Once 10 Mantra are obtained, enters Divinity for the turn, dealing triple damage with attacks. #wWallop gives Block equal to the amount of unblocked damage dealt. #wWave #wof #wthe #wHand applies Weak to you whenever Watcher gains Block that turn.",
-                  "hp": "(72 - 80 HP)",
+                    "min_asc": 3,
+                    "desc": "Starts with #wDevotion -> #wReach #wHeaven. Afterwards, cycles #wWallop -> #wWave #wof #wthe #wHand / #wProtect until entering #sDivinity. NL Upon entering #sDivinity, if #wReach #wHeaven was used since last entering #sDivinity, uses #wThrough #wViolence. Otherwise, uses #wReach #wHeven. Then cycles #wWallop -> #wWave #wof #wthe #wHand / #wProtect again.",
+                    "notes": "#uDevotion gives #uMantra every turn. Once 10 #uMantra are obtained, enters #sDivinity for the turn, dealing #rtriple #rdamage with attacks. NL #wWallop #bBlocks equal to the amount of #runblocked #rdamage dealt. NL #uWave #uof #uthe #uHand applies #dWeak to you whenever Watcher gains #bBlock that turn.",
+                    "hp": "(72 - 80 HP)",
 					"moves": [
 						{
 							"name": "Devotion",
@@ -128,8 +128,8 @@
 				},
 				{
 					"min_asc": 8,
-                    "desc": "Starts with #wDevotion -> #wReach #wHeaven. Afterwards, cycles #wWallop -> #wWave #wof #wthe #wHand / #wProtect until entering Divinity. Upon entering Divinity, if #wReach #wHeaven was used since last entering Divinity, uses #wThrough #wViolence. Otherwise, uses #wReach #wHeven. Then cycles #wWallop -> #wWave #wof #wthe #wHand / #wProtect again.",
-                    "notes": "#wDevotion gives Mantra every turn. Once 10 Mantra are obtained, enters Divinity for the turn, dealing triple damage with attacks. #wWallop gives Block equal to the amount of unblocked damage dealt. #wWave #wof #wthe #wHand applies Weak to you whenever Watcher gains Block that turn.",
+                    "desc": "Starts with #wDevotion -> #wReach #wHeaven. Afterwards, cycles #wWallop -> #wWave #wof #wthe #wHand / #wProtect until entering #sDivinity. NL Upon entering #sDivinity, if #wReach #wHeaven was used since last entering #sDivinity, uses #wThrough #wViolence. Otherwise, uses #wReach #wHeven. Then cycles #wWallop -> #wWave #wof #wthe #wHand / #wProtect again.",
+                    "notes": "#uDevotion gives #uMantra every turn. Once 10 #uMantra are obtained, enters #sDivinity for the turn, dealing #rtriple #rdamage with attacks. NL #wWallop #bBlocks equal to the amount of #runblocked #rdamage dealt. NL #uWave #uof #uthe #uHand applies #dWeak to you whenever Watcher gains #bBlock that turn.",
                     "hp": "(79 - 88 HP)",
 					"moves": [
 						{
@@ -188,9 +188,9 @@
 					]
 				},
 				{
-					"min_asc": 18,
-                    "desc": "Starts with #wDevotion -> #wReach #wHeaven. Afterwards, cycles #wWallop -> #wWave #wof #wthe #wHand / #wProtect until entering Divinity. Upon entering Divinity, if #wReach #wHeaven was used since last entering Divinity, uses #wThrough #wViolence. Otherwise, uses #wReach #wHeven. Then cycles #wWallop -> #wWave #wof #wthe #wHand / #wProtect again.",
-                    "notes": "#wDevotion gives Mantra every turn. Once 10 Mantra are obtained, enters Divinity for the turn, dealing triple damage with attacks. #wWallop gives Block equal to the amount of unblocked damage dealt. #wWave #wof #wthe #wHand applies Weak to you whenever Watcher gains Block that turn.",
+                    "min_asc": 18,
+                    "desc": "Starts with #wDevotion -> #wReach #wHeaven. Afterwards, cycles #wWallop -> #wWave #wof #wthe #wHand / #wProtect until entering #sDivinity. NL Upon entering #sDivinity, if #wReach #wHeaven was used since last entering #sDivinity, uses #wThrough #wViolence. Otherwise, uses #wReach #wHeven. Then cycles #wWallop -> #wWave #wof #wthe #wHand / #wProtect again.",
+                    "notes": "#uDevotion gives #uMantra every turn. Once 10 #uMantra are obtained, enters #sDivinity for the turn, dealing #rtriple #rdamage with attacks. NL #wWallop #bBlocks equal to the amount of #runblocked #rdamage dealt. NL #uWave #uof #uthe #uHand applies #dWeak to you whenever Watcher gains #bBlock that turn.",
                     "hp": "(79 - 88 HP)",
 					"moves": [
 						{
