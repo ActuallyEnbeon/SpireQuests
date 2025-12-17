@@ -12,13 +12,6 @@
       "Upon obtaining #b10 #yMantra, enters #yDivinity."
     ]
   },
-  "${ModID}:FakeWaveOfTheHandPower": {
-    "NAME": "Wave of the Hand",
-    "DESCRIPTIONS": [
-      "Whenever it gains #yBlock this turn, applies #b",
-      " #yWeak to you."
-    ]
-  },
   "${ModID}:InvisibleDivinityForMonsterPower": {
     "NAME": "Divinity",
     "DESCRIPTIONS": [

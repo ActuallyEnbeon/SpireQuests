@@ -13,19 +13,21 @@ import com.megacrit.cardcrawl.actions.common.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.cards.purple.*;
-import com.megacrit.cardcrawl.cards.tempCards.ThroughViolence;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.MonsterStrings;
+import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.StrengthPower;
+import com.megacrit.cardcrawl.powers.WeakPower;
+import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.relics.Shuriken;
 import com.megacrit.cardcrawl.vfx.WallopEffect;
-import com.megacrit.cardcrawl.vfx.combat.ViolentAttackEffect;
 import com.megacrit.cardcrawl.vfx.stance.DivinityParticleEffect;
 import com.megacrit.cardcrawl.vfx.stance.StanceAuraEffect;
 import spireQuests.abstracts.AbstractSQMonster;
 import spireQuests.quests.enbeon.powers.FakeDevotionPower;
-import spireQuests.quests.enbeon.powers.FakeWaveOfTheHandPower;
 import spireQuests.quests.enbeon.powers.InvisibleDivinityForMonsterPower;
 import spireQuests.quests.gk.vfx.FakePlayCardEffect;
 import spireQuests.util.Wiz;
@@ -38,11 +40,12 @@ public class WatcherEliteMonster extends AbstractSQMonster {
     public static final String NAME = monsterStrings.NAME;
     public static final String[] MOVES = monsterStrings.MOVES;
 
-    private static final Byte DEVOTION = 0, REACH_HEAVEN = 1, WALLOP = 2, WAVE_PROTECT = 3, THROUGH_VIOLENCE = 4;
+    private static final Byte RAPID_STRIKES = 0, WALLOP = 1, WAVE_PROTECT = 2;
 
+    private final AbstractRelic relic;
     private int devotionAmt = 2;
     private int waveAmt = 1;
-    private boolean hasThroughViolence = false;
+
     private float particleTimer = 0.0f;
     private float auraTimer = 0.0f;
     private long sfxId;
@@ -61,12 +64,10 @@ public class WatcherEliteMonster extends AbstractSQMonster {
         super(NAME, ID, 80, -4f, -16f, 220f, 290f, null, x, y);
         type = EnemyType.ELITE;
 
-        setHp(calcAscensionTankiness(72), calcAscensionTankiness(80));
-        addMove(DEVOTION, Intent.BUFF);
-        addMove(REACH_HEAVEN, Intent.ATTACK, calcAscensionDamage(10));
+        setHp(calcAscensionTankiness(144), calcAscensionTankiness(154));
+        addMove(RAPID_STRIKES, Intent.ATTACK_BUFF, calcAscensionDamage(6), 3);
         addMove(WALLOP, Intent.ATTACK_DEFEND, calcAscensionDamage(9));
         addMove(WAVE_PROTECT, Intent.DEFEND_DEBUFF);
-        addMove(THROUGH_VIOLENCE, Intent.ATTACK, calcAscensionDamage(20));
 
         devotionAmt = calcAscensionSpecial(devotionAmt);
         waveAmt = calcAscensionSpecial(waveAmt);
@@ -78,9 +79,10 @@ public class WatcherEliteMonster extends AbstractSQMonster {
         AnimationState.TrackEntry e = state.setAnimation(0, "Idle", true);
         stateData.setMix("Hit", "Idle", 0.1f);
         e.setTimeScale(0.6f);
-        this.eyeBone = this.skeleton.findBone("eye_anchor");
-
         flipHorizontal = true;
+        eyeBone = this.skeleton.findBone("eye_anchor");
+
+        relic = new Shuriken();
     }
 
     private void loadEyeAnimation() {
@@ -98,32 +100,42 @@ public class WatcherEliteMonster extends AbstractSQMonster {
     }
 
     @Override
+    public void init() {
+        super.init();
+        relic.currentX = relic.targetX = hb.x + hb.width + (100f* Settings.xScale);
+        relic.currentY = relic.targetY = hb.y;
+    }
+
+    @Override
+    public void usePreBattleAction() {
+        doFakePlay(new Devotion(), 18);
+        AbstractPower devotion = new FakeDevotionPower(this, devotionAmt);
+        addToBot(new ApplyPowerAction(this, this, devotion));
+        // Need to activate Devotion immediately so Watcher enters Divinity on turn 5 (4)
+        addToBot(new AbstractGameAction() {
+            @Override
+            public void update() {
+                devotion.atEndOfRound();
+                this.isDone = true;
+            }
+        });
+    }
+
+    @Override
     public void takeTurn() {
         DamageInfo info = new DamageInfo(this, moves.get(nextMove).baseDamage, DamageInfo.DamageType.NORMAL);
         info.applyPowers(this, AbstractDungeon.player);
         switch (nextMove) {
-            case 0: // Devotion
-                doFakePlay(new Devotion(), 18);
-                Wiz.atb(new AbstractGameAction() {
-                    public void update() {
-                        useFastShakeAnimation(0.25f);
-                        isDone = true;
-                    }
-                });
-                addToBot(new ApplyPowerAction(this, this, new FakeDevotionPower(this, devotionAmt)));
+            case 0: // Rapid Strikes
+                useFastAttackAnimation();
+                for (int i = 0; i < 3; i++) {
+                    doFakePlay(new Strike_Purple(), 3);
+                    addToBot(new DamageAction(AbstractDungeon.player, info, AbstractGameAction.AttackEffect.BLUNT_LIGHT));
+                }
+                addToBot(new ApplyPowerAction(this, this, new StrengthPower(this, 1)));
+                addToBot(new RelicAboveCreatureAction(this, relic));
                 break;
-            case 1: // Reach Heaven
-                doFakePlay(new ReachHeaven(), 3);
-                Wiz.atb(new AbstractGameAction() {
-                    public void update() {
-                        useFastAttackAnimation();
-                        hasThroughViolence = true;
-                        isDone = true;
-                    }
-                });
-                addToBot(new DamageAction(AbstractDungeon.player, info, AbstractGameAction.AttackEffect.SLASH_HEAVY));
-                break;
-            case 2: // Wallop
+            case 1: // Wallop
                 doFakePlay(new Wallop(), 3);
                 useSlowAttackAnimation();
                 addToBot(new DamageAction(AbstractDungeon.player, info, AbstractGameAction.AttackEffect.BLUNT_HEAVY));
@@ -141,40 +153,22 @@ public class WatcherEliteMonster extends AbstractSQMonster {
                     }
                 });
                 break;
-            case 3: // Wave of the Hand / Protect
+            case 2: // Wave of the Hand / Protect
                 doFakePlay(new WaveOfTheHand(), 18);
-                addToBot(new ApplyPowerAction(this, this, new FakeWaveOfTheHandPower(this, waveAmt)));
+                addToBot(new ApplyPowerAction(Wiz.adp(), this, new WeakPower(Wiz.adp(), waveAmt, true)));
                 doFakePlay(new Protect(), 8);
                 addToBot(new GainBlockAction(this, calcAscensionTankiness(12)));
-                break;
-            case 4: // Through Violence
-                doFakePlay(new ThroughViolence(), 3);
-                Wiz.atb(new AbstractGameAction() {
-                    public void update() {
-                        useSlowAttackAnimation();
-                        hasThroughViolence = false;
-                        isDone = true;
-                    }
-                });
-                Wiz.vfx(new ViolentAttackEffect(Wiz.adp().hb.cX, Wiz.adp().hb.cY, Color.VIOLET), 0.4F);
-                addToBot(new DamageAction(AbstractDungeon.player, info, AbstractGameAction.AttackEffect.SLASH_HEAVY));
         }
         addToBot(new RollMoveAction(this));
     }
 
     @Override
     protected void getMove(int i) {
-        // Start with Devotion, then:
-        //  - If she's just used Devotion or Through Violence, use Reach Heaven
-        //  - If she's just used Wallop, use Wave of the Hand / Protect
-        //  - Otherwise, use Wallop
+        // Cycle Wallop -> Rapid Strikes -> Wave of the Hand / Protect
         // There's special behaviour when she enters Divinity, see the below method
-        if (firstMove) {
-            setMoveShortcut(DEVOTION, MOVES[DEVOTION]);
-            firstMove = false;
-        } else if (lastMove(DEVOTION) || lastMove(THROUGH_VIOLENCE)) {
-            setMoveShortcut(REACH_HEAVEN, MOVES[REACH_HEAVEN]);
-        } else if (lastMove(WALLOP)) {
+        if (lastMove(WALLOP)) {
+            setMoveShortcut(RAPID_STRIKES, MOVES[RAPID_STRIKES]);
+        } else if (lastMove(RAPID_STRIKES)) {
             setMoveShortcut(WAVE_PROTECT, MOVES[WAVE_PROTECT]);
         } else {
             setMoveShortcut(WALLOP, MOVES[WALLOP]);
@@ -182,18 +176,11 @@ public class WatcherEliteMonster extends AbstractSQMonster {
     }
 
     // This is called in InvisibleDivinityForMonsterPower
-    public void prepareThroughViolence() {
-        // When she enters Divinity,
-        //  - If Through Violence is available, use it
-        //  - Otherwise, use Reach Heaven
-        if (hasThroughViolence) {
-            setMoveShortcut(THROUGH_VIOLENCE, MOVES[THROUGH_VIOLENCE]);
-            addToBot(new SetMoveAction(this, MOVES[THROUGH_VIOLENCE], THROUGH_VIOLENCE, Intent.ATTACK));
-        } else {
-            setMoveShortcut(REACH_HEAVEN, MOVES[REACH_HEAVEN]);
-            addToBot(new SetMoveAction(this, MOVES[REACH_HEAVEN], REACH_HEAVEN, Intent.ATTACK));
-        }
+    public void prepareDivinityMove() {
+        // Upon entering Divinity, always use Wallop (then continue cycling from that point)
+        setMoveShortcut(WALLOP, MOVES[WALLOP]);
         createIntent();
+        addToBot(new SetMoveAction(this, MOVES[WALLOP], WALLOP, Intent.ATTACK));
     }
 
     @Override
@@ -253,6 +240,10 @@ public class WatcherEliteMonster extends AbstractSQMonster {
         sr.draw(CardCrawlGame.psb, this.eyeSkeleton);
         CardCrawlGame.psb.end();
         sb.begin();
+        // Render Shuriken
+        Color transparent = Color.WHITE.cpy();
+        transparent.a = 0;
+        relic.renderWithoutAmount(sb, transparent);
     }
 
     private DivinityParticleEffect makeDivinityParticleEffect() {

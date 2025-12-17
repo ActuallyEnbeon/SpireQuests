@@ -48,7 +48,7 @@ public class InvisibleDivinityForMonsterPower extends AbstractSQPower implements
             WatcherEliteMonster watcher = (WatcherEliteMonster) owner;
             watcher.startIdleSfx();
             watcher.eyeState.setAnimation(0, "Divinity", true);
-            watcher.prepareThroughViolence();
+            watcher.prepareDivinityMove();
         }
     }
 
