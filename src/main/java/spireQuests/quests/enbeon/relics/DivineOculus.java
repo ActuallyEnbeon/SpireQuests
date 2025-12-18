@@ -9,7 +9,7 @@ import static spireQuests.Anniv8Mod.makeID;
 
 public class DivineOculus extends AbstractSQRelic {
     private static final int ACTIVATION_TURN = 5;
-    private static final int ENERGY_GAIN = 3;
+    private static final int ENERGY_GAIN = 2;
 
     public static final String ID = makeID(DivineOculus.class.getSimpleName());
 
