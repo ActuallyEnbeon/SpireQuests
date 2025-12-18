@@ -11,12 +11,5 @@
     "DESCRIPTIONS": [
       "Upon obtaining #b10 #yMantra, enters #yDivinity."
     ]
-  },
-  "${ModID}:InvisibleDivinityForMonsterPower": {
-    "NAME": "Divinity",
-    "DESCRIPTIONS": [
-      "Deals triple damage with attacks. Exits #yDivinity at the end of its turn.",
-      " - TRANSLATOR NOTE: - These strings should never appear in-game."
-    ]
   }
 }

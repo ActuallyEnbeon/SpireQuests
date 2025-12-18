@@ -8,7 +8,6 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.stances.DivinityStance;
 import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
 import com.megacrit.cardcrawl.vfx.stance.StanceChangeParticleGenerator;
@@ -19,9 +18,7 @@ import static spireQuests.Anniv8Mod.makeID;
 
 public class InvisibleDivinityForMonsterPower extends AbstractSQPower implements InvisiblePower {
     public static String POWER_ID = makeID(InvisibleDivinityForMonsterPower.class.getSimpleName());
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
-    public static final String NAME = powerStrings.NAME;
-    public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
+    public static String NAME = "";
 
     public InvisibleDivinityForMonsterPower(AbstractCreature owner) {
         super(POWER_ID, NAME, "enbeon", NeutralPowertypePatch.NEUTRAL, false, owner, 0);
