@@ -65,7 +65,7 @@ public class WatcherEliteMonster extends AbstractSQMonster {
         type = EnemyType.ELITE;
 
         setHp(calcAscensionTankiness(144), calcAscensionTankiness(154));
-        addMove(RAPID_STRIKES, Intent.ATTACK_BUFF, calcAscensionDamage(6), 3);
+        addMove(RAPID_STRIKES, Intent.ATTACK_BUFF, calcAscensionDamage(5), 6);
         addMove(WALLOP, Intent.ATTACK_DEFEND, calcAscensionDamage(9));
         addMove(WAVE_PROTECT, Intent.DEFEND_DEBUFF);
 
@@ -128,11 +128,15 @@ public class WatcherEliteMonster extends AbstractSQMonster {
         switch (nextMove) {
             case 0: // Rapid Strikes
                 useFastAttackAnimation();
-                for (int i = 0; i < 3; i++) {
-                    doFakePlay(new Strike_Purple(), 3);
+                for (int i = 0; i < 6; i++) {
+                    if (i < 3) {
+                        doFakePlay(new Strike_Purple(), Integer.MAX_VALUE); // Don't upgrade
+                    } else {
+                        doFakePlay(new FlurryOfBlows(), 3);
+                    }
                     addToBot(new DamageAction(AbstractDungeon.player, info, AbstractGameAction.AttackEffect.BLUNT_LIGHT));
                 }
-                addToBot(new ApplyPowerAction(this, this, new StrengthPower(this, 1)));
+                addToBot(new ApplyPowerAction(this, this, new StrengthPower(this, 2)));
                 addToBot(new RelicAboveCreatureAction(this, relic));
                 break;
             case 1: // Wallop

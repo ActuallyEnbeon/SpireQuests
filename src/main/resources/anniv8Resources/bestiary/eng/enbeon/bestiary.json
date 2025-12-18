@@ -27,11 +27,11 @@
               "name": "Rapid Strikes",
               "effects": [
                 {
-                  "name": "6x3",
+                  "name": "5x6",
                   "color": "DAMAGE"
                 },
                 {
-                  "name": "Strength 1",
+                  "name": "Strength 2",
                   "color": "BUFF"
                 }
               ]
@@ -74,11 +74,11 @@
               "name": "Rapid Strikes",
               "effects": [
                 {
-                  "name": "7x3",
+                  "name": "6x6",
                   "color": "DAMAGE"
                 },
                 {
-                  "name": "Strength 1",
+                  "name": "Strength 2",
                   "color": "BUFF"
                 }
               ]
@@ -121,11 +121,11 @@
               "name": "Rapid Strikes",
               "effects": [
                 {
-                  "name": "7x3",
+                  "name": "6x6",
                   "color": "DAMAGE"
                 },
                 {
-                  "name": "Strength 1",
+                  "name": "Strength 2",
                   "color": "BUFF"
                 }
               ]
@@ -168,11 +168,11 @@
               "name": "Rapid Strikes",
               "effects": [
                 {
-                  "name": "7x3",
+                  "name": "6x6",
                   "color": "DAMAGE"
                 },
                 {
-                  "name": "Strength 1",
+                  "name": "Strength 2",
                   "color": "BUFF"
                 }
               ]
