@@ -39,5 +39,13 @@
       "Collect the Emerald Key.",
       "Collect the Sapphire Key."
     ]
+  },
+  "${ModID}:BountyCharadeQuest": {
+    "TITLE": "Bounty: Charadlier",
+    "DESCRIPTION": "A maleficent amalgamation of energies descends the Spire. Cut it down and harness its powers. NL The next elite this act is replaced by the #yCharadlier.",
+    "AUTHOR": "coda",
+    "TRACKER_TEXT": [
+      "Orb cut down"
+    ]
   }
 }

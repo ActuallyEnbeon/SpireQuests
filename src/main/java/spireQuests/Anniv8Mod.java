@@ -35,6 +35,7 @@ import spireQuests.questStats.QuestStatManager;
 import spireQuests.quests.AbstractQuest;
 import spireQuests.quests.QuestGenerator;
 import spireQuests.quests.QuestManager;
+import spireQuests.quests.coda.monsters.CharadeMonster;
 import spireQuests.quests.coda.potions.NuclearJuicePotion;
 import spireQuests.quests.enbeon.monsters.WatcherEliteMonster;
 import spireQuests.quests.gk.monsters.ICEliteMonster;
@@ -205,6 +206,7 @@ public class Anniv8Mod implements
                 new EvilSentry(-85.0F, 10.0F),
                 new EvilSentry(140.0F, 30.0F)
         }));
+        BaseMod.addMonster(CharadeMonster.ID, () -> new CharadeMonster());
     }
 
     private static Consumer<String> getWidePotionsWhitelistMethod() {
