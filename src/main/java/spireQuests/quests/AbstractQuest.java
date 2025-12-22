@@ -1,5 +1,6 @@
 package spireQuests.quests;
 
+import basemod.helpers.CardPowerTip;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -179,7 +180,26 @@ public abstract class AbstractQuest implements Comparable<AbstractQuest> {
         for (QuestReward reward : questRewards) {
             reward.addTooltip(tipList);
         }
-        if(questboundRelics != null || questboundCards != null) {
+
+        boolean hasQuestboundItems = false;
+
+        if(questboundRelics != null){
+            hasQuestboundItems = true;
+
+            for (AbstractRelic r : questboundRelics){
+                tipList.add(new PowerTip(r.name, r.description));
+            }
+        }
+
+        if(questboundCards != null){
+            hasQuestboundItems = true;
+
+            for (AbstractCard c : questboundCards){
+                tipList.add(new CardPowerTip(c));
+            }
+        }
+
+        if(hasQuestboundItems){
             tipList.add(new PowerTip(Anniv8Mod.keywords.get("Questbound").PROPER_NAME, Anniv8Mod.keywords.get("Questbound").DESCRIPTION));
         }
     }

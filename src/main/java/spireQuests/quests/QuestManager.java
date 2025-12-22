@@ -160,7 +160,7 @@ public class QuestManager {
                 if(quest.removeQuestboundDuplicate) {
                     RelicMiscUtil.removeRelicFromPool(r);
                 }
-                String questName = FontHelper.colorString(CardCrawlGame.languagePack.getUIString(quest.id).TEXT[0], "y");
+                String questName = FontHelper.colorString(quest.name, "y");
                 r.instantObtain();
                 r.tips.add(new PowerTip(keywords.get("Questbound").PROPER_NAME, String.format(CardCrawlGame.languagePack.getUIString(makeID("Questbound")).TEXT[2],questName)));
             });
