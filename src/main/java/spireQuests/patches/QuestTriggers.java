@@ -1,5 +1,8 @@
 package spireQuests.patches;
 
+import basemod.BaseMod;
+import basemod.patches.com.megacrit.cardcrawl.relics.AbstractRelic.InstantObtainRelicGetHook;
+import basemod.patches.com.megacrit.cardcrawl.relics.AbstractRelic.InstantObtainRelicGetHook2;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
@@ -428,6 +431,50 @@ public class QuestTriggers {
                 locator = Locator.class
         )
         public static void Insert(AbstractRelic __instance) {
+            if (disabled()) return;
+            OBTAIN_RELIC.trigger(__instance);
+        }
+
+        private static class Locator extends SpireInsertLocator {
+            public int[] Locate(CtBehavior ctBehavior) throws Exception {
+                Matcher matcher = new Matcher.FieldAccessMatcher(AbstractPlayer.class, "relics");
+                return LineFinder.findInOrder(ctBehavior, matcher);
+            }
+        }
+    }
+
+    @SpirePatch(
+            clz = AbstractRelic.class,
+            method = "instantObtain",
+            paramtypez = {}
+    )
+    public static class InstantObtainRelicGetHook2 {
+        @SpireInsertPatch(
+                locator = Locator.class
+        )
+        public static void Insert(AbstractRelic __instance) {
+            if (disabled()) return;
+            OBTAIN_RELIC.trigger(__instance);
+        }
+
+        private static class Locator extends SpireInsertLocator {
+            public int[] Locate(CtBehavior ctBehavior) throws Exception {
+                Matcher matcher = new Matcher.FieldAccessMatcher(AbstractPlayer.class, "relics");
+                return LineFinder.findInOrder(ctBehavior, matcher);
+            }
+        }
+    }
+
+    @SpirePatch(
+            clz = AbstractRelic.class,
+            method = "instantObtain",
+            paramtypez = {AbstractPlayer.class, int.class, boolean.class}
+    )
+    public static class InstantObtainRelicGetHook {
+        @SpireInsertPatch(
+                locator = Locator.class
+         )
+        public static void Insert(AbstractRelic __instance, AbstractPlayer p, int slot, boolean callOnEquip) {
             if (disabled()) return;
             OBTAIN_RELIC.trigger(__instance);
         }
