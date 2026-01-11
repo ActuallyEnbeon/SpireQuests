@@ -58,6 +58,14 @@
       "Orb cut down"
     ]
   },
+  "${ModID}:UntouchableQuest": {
+    "TITLE": "Untouchable",
+    "DESCRIPTION": "Beat 3 combats in a row without losing any HP.",
+    "AUTHOR": "coda",
+    "TRACKER_TEXT": [
+      "Combats without losing HP"
+    ]
+  },
   "${ModID}:HellbentQuest": {
     "TITLE": "Hellbent",
     "DESCRIPTION": "End #b5 turns with no cards in hand.",
