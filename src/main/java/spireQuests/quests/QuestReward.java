@@ -1,6 +1,8 @@
 package spireQuests.quests;
 
 import basemod.helpers.CardPowerTip;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardSave;
@@ -8,17 +10,21 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.*;
+import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import com.megacrit.cardcrawl.potions.AbstractPotion;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.relics.Sozu;
 import com.megacrit.cardcrawl.rewards.RewardItem;
 import com.megacrit.cardcrawl.vfx.RainingGoldEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
+import org.lwjgl.util.vector.Vector2f;
 import spireQuests.Anniv8Mod;
+import spireQuests.questStats.StatRewardBox;
 import spireQuests.rewards.SingleCardReward;
 import spireQuests.util.TexLoader;
 import spireQuests.util.Wiz;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +37,7 @@ import static spireQuests.util.LanguageUtils.formatLanguage;
 public abstract class QuestReward {
     private static final String[] TEXT = CardCrawlGame.languagePack.getUIString(makeID("QuestReward")).TEXT;
     private static final Map<String, RewardLoader> rewardLoaders = new HashMap<>();
+    protected final Hitbox hb;
 
     static {
         addRewardSaver(new RewardLoader(GoldReward.class, (save) -> new GoldReward(Integer.parseInt(save.param))));
@@ -63,6 +70,7 @@ public abstract class QuestReward {
 
     public QuestReward(String rewardText) {
         this.rewardText = rewardText;
+        this.hb = new Hitbox(32,32);
     }
 
     public QuestRewardSave getSave() {
@@ -98,6 +106,11 @@ public abstract class QuestReward {
         @Override
         public TextureRegion icon() {
             return img;
+        }
+
+        @Override
+        public void addTooltip(List<PowerTip> tips) {
+            tips.add(new PowerTip(StatRewardBox.getGoldRewardTitleText(),rewardText));
         }
 
         @Override
@@ -188,6 +201,11 @@ public abstract class QuestReward {
         @Override
         public TextureRegion icon() {
             return ImageMaster.COPPER_COIN_1;
+        }
+
+        @Override
+        public void addTooltip(List<PowerTip> tips) {
+            tips.add(new PowerTip(StatRewardBox.getRandomRelicRewardTitleText(),rewardText));
         }
 
         @Override
@@ -339,6 +357,11 @@ public abstract class QuestReward {
         }
 
         @Override
+        public void addTooltip(List<PowerTip> tips) {
+            tips.add(new PowerTip(StatRewardBox.getMaxHPRewardTitleText(),rewardText));
+        }
+
+        @Override
         public void obtainRewardItem() {
             AbstractDungeon.player.increaseMaxHp(this.amount, true);
         }
@@ -351,6 +374,43 @@ public abstract class QuestReward {
         @Override
         public String saveParam() {
             return String.valueOf(amount);
+        }
+    }
+
+    //This class is used to draw the custom reward icon on the in-game quest list.
+    // This is not an actual reward! AbstractQuest.getQuestRewardsForActiveQuestList will automatically add it to the icons.
+    // Don't manually add this to the rewards list or else the quest's getRewardsText will try to display it too.
+    public static class CustomRewardIconPlaceholder extends QuestReward {
+        private static final Texture tex = StatRewardBox.getCustomRewardImage();
+        private static final TextureRegion img = new TextureRegion(tex, tex.getWidth(), tex.getHeight());
+
+        public CustomRewardIconPlaceholder(String rewardText) {
+            super(rewardText);
+        }
+
+        @Override
+        public TextureRegion icon() {
+            return img;
+        }
+
+        @Override
+        public void addTooltip(List<PowerTip> tips) {
+            tips.add(new PowerTip(StatRewardBox.getCustomRewardTitleText(),rewardText));
+        }
+
+        @Override
+        public void obtainRewardItem() {
+            //do nothing
+        }
+
+        @Override
+        public void obtainInstant() {
+            //do nothing
+        }
+
+        @Override
+        public String saveParam() {
+            return String.valueOf(0);
         }
     }
 
@@ -381,6 +441,36 @@ public abstract class QuestReward {
             this.type = type;
             this.param = param;
             this.card = card;
+        }
+    }
+
+    public void repositionHitbox(float x,float y,float width,float height){
+        hb.move(x+width/2,y+height/2);
+        hb.width=width;
+        hb.height=height;
+    }
+
+    public void updateHitbox(){
+        hb.update();
+    }
+
+    public void renderHitbox(SpriteBatch sb){
+        hb.render(sb);
+    }
+
+    public void drawTooltipIfHovered(){
+        if(!hb.hovered)return;
+        ArrayList<PowerTip> previewTooltips = new ArrayList<>();
+        addTooltip(previewTooltips);
+        Vector2f pos = getMousePositionForTip();
+        TipHelper.queuePowerTips(pos.x,pos.y,previewTooltips);
+    }
+
+    public static Vector2f getMousePositionForTip(){
+        if ((float) InputHelper.mX < 1400.0F * Settings.scale) {
+            return new Vector2f((float) InputHelper.mX + 60.0F * Settings.xScale, (float) InputHelper.mY - 50.0F * Settings.yScale);
+        } else {
+            return new Vector2f((float) InputHelper.mX - 350.0F * Settings.xScale, (float) InputHelper.mY - 50.0F * Settings.yScale);
         }
     }
 }

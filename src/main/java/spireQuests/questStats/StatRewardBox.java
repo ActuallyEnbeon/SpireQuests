@@ -247,4 +247,22 @@ public class StatRewardBox implements IUIElement {
     public int updateOrder() {
         return 1;
     }
+
+
+    public static String getRandomRelicRewardTitleText(){
+        return CardCrawlGame.languagePack.getUIString(ID).TEXT[0];
+    }
+    public static String getGoldRewardTitleText(){
+        return CardCrawlGame.languagePack.getUIString(ID).TEXT[1];
+    }
+    public static String getCustomRewardTitleText(){
+        return CardCrawlGame.languagePack.getUIString(ID).TEXT[2];
+    }
+    public static String getMaxHPRewardTitleText(){
+        return CardCrawlGame.languagePack.getUIString(ID).TEXT[3];
+    }
+
+    public static Texture getCustomRewardImage(){
+        return CUSTOM_REWARD_IMG;
+    }
 }

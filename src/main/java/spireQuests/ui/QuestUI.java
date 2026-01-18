@@ -17,6 +17,7 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 import spireQuests.Anniv8Mod;
 import spireQuests.quests.AbstractQuest;
 import spireQuests.quests.QuestManager;
+import spireQuests.quests.QuestReward;
 import spireQuests.util.ImageHelper;
 import spireQuests.util.TexLoader;
 
@@ -72,6 +73,10 @@ public class QuestUI {
             if (questHitboxes.size() <= i) questHitboxes.add(new Hitbox(1, 1));
 
             Hitbox hb = questHitboxes.get(i);
+            List<QuestReward> rewards = quest.getQuestRewardsForActiveQuestList();
+            for (QuestReward reward : rewards) {
+                reward.updateHitbox();
+            }
 
             int trackerCount = 0;
             for (AbstractQuest.Tracker t : quest.trackers) {
@@ -174,18 +179,23 @@ public class QuestUI {
                 boolean complete = quest.complete();
                 boolean failed = quest.fail();
 
+                List<QuestReward> rewards = quest.getQuestRewardsForActiveQuestList();
+
                 if (questHitboxes.size() <= i) questHitboxes.add(new Hitbox(1, 1));
                 Hitbox hb = questHitboxes.get(i);
 
                 yPos -= LARGE_SPACING;
-                float rewardOffset = !failed ? 34 * quest.questRewards.size() + 8 : 0;
+                float rewardOffset = !failed ? 34 * rewards.size() + 8 : 0;
                 FontHelper.renderFontRightAligned(sb, largeFont, quest.name, xPos - rewardOffset, yPos - SMALL_SPACING * 0.5f, complete ? Settings.GOLD_COLOR : failed ? Settings.RED_TEXT_COLOR : Color.WHITE);
 
                 quest.width = FontHelper.layout.width + rewardOffset;
 
                 if (!failed) {
-                    for (int j = 0; j < quest.questRewards.size(); ++j) {
-                        sb.draw(quest.questRewards.get(j).icon(), xPos - (32 * (quest.questRewards.size() - j)), yPos - (SMALL_SPACING * 1.1f), 32, 32);
+                    for (int j = 0; j < rewards.size(); ++j) {
+                        sb.draw(rewards.get(j).icon(), xPos - (32 * (rewards.size() - j)), yPos - (SMALL_SPACING * 1.1f), 32, 32);
+                        rewards.get(j).repositionHitbox(xPos - (32 * (rewards.size() - j)), yPos - (SMALL_SPACING * 1.1f), 32, 32);
+                        rewards.get(j).renderHitbox(sb);
+                        rewards.get(j).drawTooltipIfHovered();
                     }
                 }
 
