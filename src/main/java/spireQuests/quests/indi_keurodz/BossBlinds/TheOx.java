@@ -2,7 +2,7 @@ package spireQuests.quests.indi_keurodz.BossBlinds;
 
 import basemod.BaseMod;
 import basemod.abstracts.CustomSavable;
-import basemod.helpers.TooltipInfo;
+import basemod.helpers.CardBorderGlowManager;
 import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.mod.stslib.StSLib;
 import com.evacipated.cardcrawl.modthespire.lib.*;
@@ -11,8 +11,12 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.map.MapRoomNode;
+
+import spireQuests.Anniv8Mod;
 import spireQuests.patches.ShowMarkedNodesOnMapPatch;
+import spireQuests.patches.ShowMarkedNodesOnMapPatch.ImageField;
 import spireQuests.quests.indi_keurodz.BalatroQuest;
+import spireQuests.quests.indi_keurodz.BalatroQuest.BossBlind;
 import spireQuests.util.Wiz;
 
 import java.util.ArrayList;
@@ -20,6 +24,9 @@ import java.util.ArrayList;
 import static spireQuests.Anniv8Mod.makeID;
 
 public class TheOx {
+
+    private static AbstractCard mostPlayedCard;
+    public static final String GLOW_ID = Anniv8Mod.makeID("TheOx");
 
     // Track number of plays within each card
     @SpirePatch(clz = AbstractCard.class, method = SpirePatch.CLASS)
@@ -105,40 +112,50 @@ public class TheOx {
         return mostPlayed;
     }
 
-    @SpirePatch2(clz = AbstractCard.class, method = "update")
-    public static class UpdateOxGlow {
+    @SpirePatch2(clz = AbstractPlayer.class, method = "preBattlePrep")
+    public static class AddGlowOnCombatStart {
         @SpirePostfixPatch
-        public static void UpdateGlow(AbstractCard __instance) {
-            if (!ShowMarkedNodesOnMapPatch.ImageField.CheckMarks(AbstractDungeon.currMapNode, BalatroQuest.ID,
-                    BalatroQuest.BossBlind.Ox.frames)) {
+        public static void SetMostPlayedCard() {
+            if (!ImageField.CheckMarks(AbstractDungeon.currMapNode, BalatroQuest.ID, BossBlind.Ox.frames))
                 return;
-            }
 
-            // Only apply glow to most played card at the start of combat
-            if (mostPlayedCard != null && __instance.uuid == mostPlayedCard.uuid) {
-                __instance.glowColor = Color.RED.cpy();
-                __instance.triggerOnGlowCheck();
-            }
+            mostPlayedCard = getMostPlayedCard();
+
+            CardBorderGlowManager.addGlowInfo(new CardBorderGlowManager.GlowInfo() {
+                @Override
+                public boolean test(AbstractCard card) {
+                    return mostPlayedCard != null && card.uuid == mostPlayedCard.uuid;
+                }
+
+                @Override
+                public Color getColor(AbstractCard abstractCard) {
+                    return Color.RED.cpy();
+                }
+
+                @Override
+                public String glowID() {
+                    return GLOW_ID;
+                }
+            });
         }
     }
 
-    private static AbstractCard mostPlayedCard;
-
-    @SpirePatch2(clz = AbstractPlayer.class, method = "applyStartOfCombatPreDrawLogic")
-    public static class SetMostPlayedOnCombatStart {
-        @SpirePostfixPatch
-        public static void SetMostPlayedCard() {
-            if (!ShowMarkedNodesOnMapPatch.ImageField.CheckMarks(AbstractDungeon.currMapNode, BalatroQuest.ID,
-                    BalatroQuest.BossBlind.Ox.frames))
+    @SpirePatch2(clz = AbstractPlayer.class, method = "onVictory")
+    public static class RemoveGlowOnCombatEnd {
+        @SpirePrefixPatch
+        public static void removeGlow() {
+            if (!ImageField.CheckMarks(AbstractDungeon.currMapNode, BalatroQuest.ID, BossBlind.Ox.frames))
                 return;
-            mostPlayedCard = getMostPlayedCard();
+
+            CardBorderGlowManager.removeGlowInfo(GLOW_ID);
         }
     }
 
     public static void updateOxTooltip() {
         String newDescription = getTooltipDescription();
 
-        if (getMostPlayedCard() == null) return;
+        if (getMostPlayedCard() == null)
+            return;
         BalatroQuest.BossBlind.Ox.tooltip.description = newDescription;
     }
 
